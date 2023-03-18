@@ -1,0 +1,21 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+    margin: auto;
+    background-color: #9298a5e0;
+    padding-bottom: 100px;
+}
+.sign-up form {
+    display: flex;
+    flex-direction: column;
+    gap:4px
+
+}
+.sign-up form input {
+    border: none;
+    border-radius: 8px;
+    padding: 6px;
+    outline: none;
+}
