@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import {useDispatch} from 'react-redux'
 import '../../App.css'
+import { createUser } from '../../features/Auth/authSlice';
 
 
 const Signup = () => {
@@ -9,7 +11,7 @@ const Signup = () => {
 const password = useWatch({control,name:'password'})
 const confirmPassword = useWatch({control,name:'confirmPassword'})
 const [disabled, setDisabled] = useState(true)
-
+const dispatch = useDispatch()
 useEffect(()=>{
 if(password !== undefined && password !== "" && confirmPassword !== undefined && confirmPassword !== '' && password === confirmPassword){
 setDisabled(false)
@@ -17,7 +19,9 @@ setDisabled(false)
 setDisabled(true)
 }
 },[password,confirmPassword])
-  const onSubmit = data => console.log(data)
+  const onSubmit = data => {
+   dispatch(createUser(data))
+  }
     return (
         <div className='form sign-up'>
           <h3>Create Account</h3>
