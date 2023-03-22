@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { loginUser } from '../../features/Auth/authSlice';
 
 const Login = () => {
+  const {isLoading,email} = useSelector(state => state.auth)
   const {handleSubmit,register,formState:{errors},control} = useForm()
     const password =  useWatch({control,name:'password'})
   const [disabled, setDisabled] = useState(true)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 useEffect(() => {
 if(password !== undefined && password !== ''){
     setDisabled(false)
@@ -14,7 +19,15 @@ if(password !== undefined && password !== ''){
 }
 
 }, [password])
-const onSubmit = data => console.log(data)
+useEffect(() => {
+  if(!isLoading && email){
+    navigate('/')
+  }
+
+
+}, [isLoading,email,navigate])
+
+const onSubmit = data => dispatch(loginUser(data))
     return( 
     <div className='form sign-up'>
     <h3>Login</h3>

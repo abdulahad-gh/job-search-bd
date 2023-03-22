@@ -1,3 +1,20 @@
+*{
+    
+    box-sizing: border-box;
+    text-decoration: none;
+}
+nav{
+    display: flex;
+    justify-content: space-between ;
+}
+nav .right-side ul{
+    display: flex;
+    gap:10px
+}
+nav .right-side ul Link:hover {
+background-color: gray;
+padding: 2px;
+}
 .form {
     display: flex;
     flex-direction: column;
