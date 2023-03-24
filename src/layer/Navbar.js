@@ -29,7 +29,7 @@ const Navbar = () => {
                        {
                         !email ?  <li><Link to='/signup'>Signup</Link></li>
                         :
-                        <li><Link to='/signup'>Register</Link></li>
+                        <li><Link to='/register'>Register</Link></li>
                        }
                         {
                             email ? <button onClick={handleLogout}>Logout</button> :
