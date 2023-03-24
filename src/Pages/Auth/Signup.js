@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-import {useDispatch} from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux'
 import '../../App.css'
 import { createUser } from '../../features/Auth/authSlice';
+import { useSaveUserMutation } from '../../features/Auth/authApi';
+import { toast } from 'react-hot-toast';
 
 
 const Signup = () => {
-  const {handleSubmit,register,formState:{errors},control} = useForm()
+
+  const {handleSubmit,reset,register,formState:{errors},control} = useForm()
 const password = useWatch({control,name:'password'})
 const confirmPassword = useWatch({control,name:'confirmPassword'})
 const [disabled, setDisabled] = useState(true)
+const navigate = useNavigate()
+const {email} = useSelector(state => state.auth)
+
+const [saveUser,{isLoading,isError,isSuccess,error}] = useSaveUserMutation()
 const dispatch = useDispatch()
 useEffect(()=>{
 if(password !== undefined && password !== "" && confirmPassword !== undefined && confirmPassword !== '' && password === confirmPassword){
@@ -19,8 +26,20 @@ setDisabled(false)
 setDisabled(true)
 }
 },[password,confirmPassword])
+
+useEffect(()=>{
+  if(email){
+    navigate('/')
+  }
+},[email,navigate])
+
   const onSubmit = data => {
-   dispatch(createUser(data))
+    saveUser(data)
+    dispatch(createUser(data))
+    reset()
+ 
+
+
   }
     return (
         <div className='form sign-up'>

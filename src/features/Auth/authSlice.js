@@ -2,6 +2,7 @@ import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
 import { toast } from "react-hot-toast";
 import auth from '../../firebaseConfig'
+import { errorFunc } from "../../Pages/Auth/Signup";
 
 const initialState = {
     email:'',
@@ -11,6 +12,7 @@ const initialState = {
     error: ''
 }
 
+
 export const createUser = createAsyncThunk('auth/createUser',async({email,password})=>{
 
     const data = await createUserWithEmailAndPassword(auth,email,password).then(user => {
@@ -19,6 +21,7 @@ export const createUser = createAsyncThunk('auth/createUser',async({email,passwo
     })
     .catch(error => {
         toast.error(error.message)
+      
     })
 return data.user.email
 

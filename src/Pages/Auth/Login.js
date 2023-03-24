@@ -23,6 +23,7 @@ useEffect(() => {
   if(!isLoading && email){
     navigate('/')
   }
+  
 
 
 }, [isLoading,email,navigate])

@@ -24,12 +24,16 @@ const Navbar = () => {
             </div>
             <div className='right-side'>
                 <ul>
-                <Link to='/'>Home</Link>
+                <li><Link to='/'>Home</Link></li>
                     
-                        <Link to='/signup'>Signup</Link>
+                       {
+                        !email ?  <li><Link to='/signup'>Signup</Link></li>
+                        :
+                        <li><Link to='/signup'>Register</Link></li>
+                       }
                         {
                             email ? <button onClick={handleLogout}>Logout</button> :
-                            <Link to='/login'>Login</Link>
+                            <li><Link to='/login'>Login</Link></li>
                         }
                  
                 </ul>
